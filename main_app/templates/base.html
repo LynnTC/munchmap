@@ -21,6 +21,8 @@
           <li><a href="{% url 'about' %}">About</a></li>
           {% if user.is_authenticated %}
           <li><a href="{% url 'index' %}">My Restaurants</a></li>
+          <li><a href="{% url 'restaurants_create' %}">Add Restaurant</a></li>
+          
           <li>
             <a href="#">
               <form action="{% url 'logout' %}" method="POST">
