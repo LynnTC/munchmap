@@ -6,11 +6,11 @@ from datetime import date
 # Create your models here.
 
 RATING = (
-  (1, '*'),
-  (2, '**'),
-  (3, '***'),
-  (4, '****'),
-  (5, '*****')
+    (1, '⭐'),
+    (2, '⭐⭐'),
+    (3, '⭐⭐⭐'),
+    (4, '⭐⭐⭐⭐'),
+    (5, '⭐⭐⭐⭐⭐')
 )
 
 class Restaurant(models.Model):
@@ -29,11 +29,12 @@ class Restaurant(models.Model):
 
 class Review(models.Model):
   content = models.TextField(max_length=1000)
-  date = models.DateField('Review Date')
-  rating = models.CharField(
+  date = models.DateField('Review Date', auto_now_add=True)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  rating = models.IntegerField(
     max_length=1,
     choices = RATING,
-    default = RATING[4][1]
+    default = RATING[4][0]
     )
   
   restaurant = models.ForeignKey(
@@ -43,7 +44,6 @@ class Review(models.Model):
 
   class Meta:
     ordering = ['-date']
-
 
 
 
