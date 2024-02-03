@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Restaurant
+from .forms import ReviewForm
 
 # Create your views here.
 def home(request):
@@ -18,8 +19,10 @@ def restaurant_index(request):
 
 def restaurants_detail(request, restaurant_id):
   restaurant = Restaurant.objects.get(id=restaurant_id)
+  review_form = ReviewForm()
   return render(request, 'restaurants/detail.html', {
-    'restaurant': restaurant
+    'restaurant': restaurant,
+    'review_form': review_form,
   })
 
 class RestaurantCreate(CreateView):
@@ -30,7 +33,13 @@ class RestaurantCreate(CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-
+def ReviewCreate(request, restaurant_id):
+  form = ReviewForm(request.POST)
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.restaurant_id = restaurant_id
+    new_review.save()
+  return redirect('detail', restaurant_id=restaurant_id)
 
 
 def signup(request):

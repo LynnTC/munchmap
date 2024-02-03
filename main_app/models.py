@@ -1,8 +1,18 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from datetime import date
 
 # Create your models here.
+
+RATING = (
+  (1, '*'),
+  (2, '**'),
+  (3, '***'),
+  (4, '****'),
+  (5, '*****')
+)
+
 class Restaurant(models.Model):
   name = models.CharField(max_length=50)
   description = models.TextField(max_length=250)
@@ -16,5 +26,24 @@ class Restaurant(models.Model):
   def get_absolute_url(self):
     return reverse('detail', kwargs={'restaurant_id': self.id})
   
+
+class Review(models.Model):
+  content = models.TextField(max_length=1000)
+  date = models.DateField('Review Date')
+  rating = models.CharField(
+    max_length=1,
+    choices = RATING,
+    default = RATING[4][1]
+    )
+  
+  restaurant = models.ForeignKey(
+    Restaurant,
+    on_delete=models.CASCADE
+  )
+
+  class Meta:
+    ordering = ['-date']
+
+
 
 
