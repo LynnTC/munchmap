@@ -32,10 +32,12 @@ class Review(models.Model):
   date = models.DateField('Review Date', auto_now_add=True)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   rating = models.IntegerField(
-    max_length=1,
     choices = RATING,
     default = RATING[4][0]
     )
+  
+  def get_rating_display(self):
+    return dict(RATING)[self.rating]
   
   restaurant = models.ForeignKey(
     Restaurant,
