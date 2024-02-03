@@ -8,6 +8,6 @@ urlpatterns = [
   path('restaurants/<int:restaurant_id>/', views.restaurants_detail, name='detail'),
   path('restaurants/create/', views.RestaurantCreate.as_view(), name='restaurants_create'),
   path('restaurants/<int:restaurant_id>/review/', views.ReviewCreate, name='reviews_create'),
+  path('restaurants/<int:restaurant_id>/add_photo/', views.add_photo, name='add_photo'),
   path('accounts/signup', views.signup, name='signup'),
-
 ]
