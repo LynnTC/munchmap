@@ -48,6 +48,10 @@ def ReviewCreate(request, restaurant_id):
     new_review.save()
   return redirect('detail', restaurant_id=restaurant_id)
 
+def ReviewUpdate(request, review_id):
+  form = ReviewForm(request.POST)
+  
+
 def add_photo(request, restaurant_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:

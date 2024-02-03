@@ -44,6 +44,9 @@
             <span>{{ review.content }}</span>
             <span>{{ review.get_rating_display }}</span>
           </span>
+          <div class="card-action">
+            <a href="{% url 'reviews_update' restaurant.id %}">Edit</a>
+          </div>
         </div>
       </div>
     {% endfor %}
