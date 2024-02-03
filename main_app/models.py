@@ -6,11 +6,11 @@ from datetime import date
 # Create your models here.
 
 RATING = (
-  (1, '*'),
-  (2, '**'),
-  (3, '***'),
-  (4, '****'),
-  (5, '*****')
+  (1, '⭐'),
+  (2, '⭐⭐'),
+  (3, '⭐⭐⭐'),
+  (4, '⭐⭐⭐⭐'),
+  (5, '⭐⭐⭐⭐⭐')
 )
 
 class Restaurant(models.Model):

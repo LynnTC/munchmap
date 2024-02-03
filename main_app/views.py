@@ -15,7 +15,10 @@ def about(request):
   return render(request, 'about.html')
 
 def restaurant_index(request):
-  return render(request, 'restaurants/index.html')
+    restaurants = Restaurant.objects.all()
+    return render(request, 'restaurants/index.html', {
+        'restaurants': restaurants
+    })
 
 def restaurants_detail(request, restaurant_id):
   restaurant = Restaurant.objects.get(id=restaurant_id)
