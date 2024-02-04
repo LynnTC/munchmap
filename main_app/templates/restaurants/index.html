@@ -5,8 +5,8 @@
 
 {% for restaurant in restaurants %}
     <a href="{% url 'detail' restaurant.id %}">
-        <div class="card">
-            <div class="card-content">
+        <div class="card light-blue lighten-2">
+            <div class="card-content black-text">
                 <span class="card-title">{{ restaurant.name }}</span>
                 <p>Description: {{ restaurant.description }}</p>
             </div>
