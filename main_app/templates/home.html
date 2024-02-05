@@ -3,4 +3,28 @@
 
 <h1>Home Page</h1>
 
+
+{% for follow in following %}
+
+  <h3>{{ follow.target }}</h3>
+
+  {% for review in reviews %}
+    
+    {% if follow.target == review.user %}  
+
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">
+            <p>{{ review.restaurant.name }}</p><br>
+            <p>{{ review.content }}</p><br>
+            <p>{{ review.get_rating_display }}</p><br>
+          </span>
+        </div>
+      </div>
+
+    {% endif %}  
+  {% endfor %}
+{% endfor %}
+
+
 {% endblock %}
