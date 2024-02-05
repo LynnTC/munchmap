@@ -62,23 +62,6 @@ class ReviewDelete(DeleteView):
   model = Review
   restaurant = model.restaurant
   success_url = '/restaurants/{restaurant_id}'
-
-
-# def ReviewCreate(request, restaurant_id):
-#   form = ReviewForm(request.POST)
-#   if form.is_valid():
-#     new_review = form.save(commit=False)
-#     new_review.restaurant_id = restaurant_id
-#     new_review.user = request.user
-#     new_review.save()
-#   return redirect('detail', restaurant_id=restaurant_id)
-
-# def ReviewUpdate(request, review_id):
-#   form = ReviewForm(request.POST)
-  
-# def ReviewDelete(request):
-#   model = Review(request.DELETE)
-#   success_url = '/'
   
 
 def add_photo(request, restaurant_id):
