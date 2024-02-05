@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if object %}
+        <p>Edit</p>
+    {% else %}
+        <p>Add Review</p>
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit Review" class="btn">
+    </form>
+
+<script>
+    const selectEl = document.getElementById('id_rating');
+    M.FormSelect.init(selectEl);  
+</script>
+{% endblock %}
+
