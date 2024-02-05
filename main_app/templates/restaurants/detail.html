@@ -3,11 +3,7 @@
 
 <h1>Restaurants</h1>
 
-<form action="{% url 'reviews_create' restaurant.id %}" method="POST">
-  {% csrf_token %}
-  {{ review_form.as_p }}
-  <input type="submit" class="btn" value="Add Review">
-</form>
+<a href="{% url 'reviews_create' restaurant_id=restaurant.id %}">Add Review</a>
 
 <div class="row">
   <div class="col s12">
@@ -45,7 +41,10 @@
             <p>{{ review.get_rating_display }}</p><br>
           </span>
           <div class="card-action">
-            <a href="{% url 'reviews_update' restaurant.id %}">Edit</a>
+            <a href="{% url 'reviews_update' review.id %}">Edit</a>
+          </div>
+          <div class="card-action">
+            <a href="{% url 'reviews_delete' review.id %}">Delete</a>
           </div>
         </div>
       </div>
