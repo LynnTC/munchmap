@@ -48,6 +48,11 @@ class Review(models.Model):
     ordering = ['-date']
 
 
+class Following(models.Model):
+  target = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "followers")
+  follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "targets")
+
+
 class Photo(models.Model):
   url = models.CharField(max_length=200)
   restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
