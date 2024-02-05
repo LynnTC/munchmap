@@ -9,11 +9,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from .models import Restaurant, Review, Photo
+from .models import Restaurant, Review, Photo, Following
 
 # Create your views here.
 def home(request):
-  return render(request, 'home.html')
+  following = Following.objects.all()
+  reviews = Review.objects.all()
+  return render(request, 'home.html', {
+    'following': following,
+    'reviews': reviews
+  })
+  
 
 def about(request):
   return render(request, 'about.html')
