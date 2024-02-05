@@ -56,6 +56,7 @@ class ReviewCreate(CreateView):
 class ReviewUpdate(UpdateView):
   model = Review
   fields = ['content', 'rating']
+  success_url = '/restaurants/{restaurant_id}'
   
 class ReviewDelete(DeleteView):
   model = Review
