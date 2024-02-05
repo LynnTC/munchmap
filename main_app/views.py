@@ -60,7 +60,8 @@ class ReviewUpdate(UpdateView):
   
 class ReviewDelete(DeleteView):
   model = Review
-  success_url = '/'
+  restaurant = model.restaurant
+  success_url = '/restaurants/{restaurant_id}'
 
 
 # def ReviewCreate(request, restaurant_id):
