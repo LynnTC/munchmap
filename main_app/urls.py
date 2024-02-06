@@ -11,6 +11,7 @@ urlpatterns = [
   path('review/<int:pk>/update/', views.ReviewUpdate.as_view(), name='reviews_update'),
   path('review/<int:pk>/delete/', views.ReviewDelete.as_view(), name='reviews_delete'),
   path('restaurants/<int:restaurant_id>/add_photo/', views.add_photo, name='add_photo'),
-  path('restaurants/<int:target_id>/follow/<int:follower_id>/', views.follow_user, name='follow_user'),
+  path('restaurants/<int:restaurant_id>/follow/<int:target_id>/', views.follow_user, name='follow_user'),
+  path('restaurants/<int:restaurant_id>/unfollow/<int:target_id>/', views.unfollow_user, name='unfollow_user'),
   path('accounts/signup', views.signup, name='signup'),
 ]

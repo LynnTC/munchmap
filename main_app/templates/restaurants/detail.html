@@ -38,9 +38,22 @@
           <span class="card-title">
             <p>{{ review.user.username }}</p>
             {% if user.id != review.user.id %}
-            <div class="card-action">
-              <a href="{% url 'follow_user' review.user.id request.user.id restaurant.id %}">Follow</a>
-            </div>
+              {% if user in review.user.followers.all %}
+                <div class="card-action">
+                  <form action="{% url 'unfollow_user' restaurant.id review.user.id %}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" value="Unfollow" class="btn">
+                </form>
+                </div>
+              {% else %}
+                <div class="card-action">
+                  <form action="{% url 'follow_user' restaurant.id review.user.id %}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" value="Follow" class="btn">
+                </form>
+                </div>
+              {% endif %}
+      
             {% endif %}
             <br>
             <p>{{ review.content }}</p><br>
