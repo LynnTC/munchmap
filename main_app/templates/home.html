@@ -7,12 +7,10 @@
 {% for follow in following %}
 
   <h3>{{ follow.target }}</h3>
-  <div class="card-action">
-    <form action="{% url 'unfollow_user' review.user.id %}" method="POST">
+    <form action="{% url 'home_unfollow_user' follow.target.id %}" method="POST">
     {% csrf_token %}
     <input type="submit" value="Unfollow" class="btn">
   </form>
-  </div>
 
   {% for review in reviews %}
     
