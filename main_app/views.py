@@ -21,13 +21,14 @@ def home(request):
     'reviews': reviews
   })
 
-def follow_user(request, target_id, follower_id, restaurant_id):
-    Following.follower(request.user.id, target_id)
-    request.user.target.add(follower_id)
-    user = User.objects.all()
-    return redirect(f'/restaurants/{restaurant_id}/',{
-      'user': user
-    })
+def follow_user(request, restaurant_id, target_id):
+    Following.objects.create(target_id=target_id, follower=request.user)
+    return redirect(f'/restaurants/{restaurant_id}/')
+
+def unfollow_user(request, restaurant_id, target_id):
+    follow = Following.objects.get(target_id=target_id, follower=request.user)
+    follow.delete()
+    return redirect(f'/restaurants/{restaurant_id}/')
   
 def about(request):
   return render(request, 'about.html')
@@ -40,10 +41,8 @@ def restaurant_index(request):
 
 def restaurants_detail(request, restaurant_id):
   restaurant = Restaurant.objects.get(id=restaurant_id)
-  user = User.objects.all()
   return render(request, 'restaurants/detail.html', {
     'restaurant': restaurant,
-    'user': user
   })
 
 class RestaurantCreate(CreateView):
