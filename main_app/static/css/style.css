@@ -19,9 +19,11 @@ div.nav-wrapper {
   background-color: rgb(48, 165, 254);
 }
 
-a.left.brand-logo {
+.left.brand-logo {
   color: rgb(252, 125, 203);
   font-weight: bold ;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
 }
 
 .submit-link {
