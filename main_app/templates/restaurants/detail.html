@@ -39,7 +39,7 @@
             <p>{{ review.user.username }}</p>
             {% if user.id != review.user.id %}
             <div class="card-action">
-              <a href="{% url 'follow_user' %}">Follow</a>
+              <a href="{% url 'follow_user' review.user.id request.user.id restaurant.id %}">Follow</a>
             </div>
             {% endif %}
             <br>
