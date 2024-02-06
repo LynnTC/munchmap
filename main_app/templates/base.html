@@ -16,11 +16,12 @@
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;MUNCH MAP</a></li>
+          <li class="left brand-logo">&nbsp;&nbsp;MUNCH MAP</li>
         </ul>
         <ul class="right">
-          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'home' %}">Home</a></li>
           {% if user.is_authenticated %}
+          <li><a href="{% url 'feed' %}">Feed</a></li>
           <li><a href="{% url 'index' %}">My Restaurants</a></li>
           <li><a href="{% url 'restaurants_create' %}">Add Restaurant</a></li>
           <li>

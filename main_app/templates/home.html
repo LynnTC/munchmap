@@ -1,34 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Home Page</h1>
-
-
-{% for follow in following %}
-
-  <h3>{{ follow.target }}</h3>
-    <form action="{% url 'home_unfollow_user' follow.target.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Unfollow" class="btn">
-  </form>
-
-  {% for review in reviews %}
-    
-    {% if follow.target == review.user %}  
-
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">
-            <p>{{ review.restaurant.name }}</p><br>
-            <p>{{ review.content }}</p><br>
-            <p>{{ review.get_rating_display }}</p><br>
-          </span>
-        </div>
-      </div>
-
-    {% endif %}  
-  {% endfor %}
-{% endfor %}
-
+<h1>About MUNCH MAP</h1>
+<hr>
+<p>This is where we put information about MUNCH MAP</p>
 
 {% endblock %}

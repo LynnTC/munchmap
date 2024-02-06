@@ -14,30 +14,33 @@ from django.db.models import Exists, OuterRef
 from .models import Restaurant, Review, Photo, Following
 
 # Create your views here.
-def home(request):
+def feed(request):
   following = Following.objects.filter(follower=request.user)
   reviews = Review.objects.all()
-  return render(request, 'home.html', {
+  return render(request, 'feed.html', {
     'following': following,
     'reviews': reviews
   })
 
+@login_required
 def follow_user(request, restaurant_id, target_id):
     Following.objects.create(target_id=target_id, follower=request.user)
     return redirect(f'/restaurants/{restaurant_id}/')
 
+@login_required
 def unfollow_user(request, restaurant_id, target_id):
     follow = Following.objects.get(target_id=target_id, follower=request.user)
     follow.delete()
     return redirect(f'/restaurants/{restaurant_id}/')
 
+@login_required
 def home_unfollow_user(request, target_id):
     follow = Following.objects.get(target_id=target_id, follower=request.user)
     follow.delete()
     return redirect('home')
   
-def about(request):
-  return render(request, 'about.html')
+def home(request):
+  return render(request, 'home.html')
 
 def restaurant_index(request):
     restaurants = Restaurant.objects.all()
@@ -60,7 +63,8 @@ def restaurants_detail(request, restaurant_id):
     'reviews': reviews
   })
 
-class RestaurantCreate(CreateView):
+
+class RestaurantCreate(LoginRequiredMixin, CreateView):
   model = Restaurant
   fields = ['name', 'description', 'genre', 'price']
 
@@ -69,7 +73,7 @@ class RestaurantCreate(CreateView):
     return super().form_valid(form)
 
 
-class ReviewCreate(CreateView):
+class ReviewCreate(LoginRequiredMixin, CreateView):
   model = Review
   fields = ['content', 'rating']
 
@@ -85,18 +89,18 @@ class ReviewCreate(CreateView):
   success_url = '/restaurants/{restaurant_id}'
 
 
-class ReviewUpdate(UpdateView):
+class ReviewUpdate(LoginRequiredMixin, UpdateView):
   model = Review
   fields = ['content', 'rating']
   success_url = '/restaurants/{restaurant_id}'
 
 
-class ReviewDelete(DeleteView):
+class ReviewDelete(LoginRequiredMixin, DeleteView):
   model = Review
   restaurant = model.restaurant
   success_url = '/restaurants/{restaurant_id}'
   
-
+@login_required
 def add_photo(request, restaurant_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
