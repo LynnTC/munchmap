@@ -21,10 +21,13 @@ def home(request):
     'reviews': reviews
   })
 
-def follow_user(request, user_id, review_user_id):
-  Following.follower(user_id)
-  request.user.target.add(review_user_id)
-  return redirect('/restaurants/{restaurant_id}')
+def follow_user(request, target_id, follower_id, restaurant_id):
+    Following.follower(request.user.id, target_id)
+    request.user.target.add(follower_id)
+    user = User.objects.all()
+    return redirect(f'/restaurants/{restaurant_id}/',{
+      'user': user
+    })
   
 def about(request):
   return render(request, 'about.html')
