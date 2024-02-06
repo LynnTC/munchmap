@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.db.models import Exists, OuterRef
 from .models import Restaurant, Review, Photo, Following
 
 # Create your views here.
@@ -41,8 +42,17 @@ def restaurant_index(request):
 
 def restaurants_detail(request, restaurant_id):
   restaurant = Restaurant.objects.get(id=restaurant_id)
+  revs = Review.objects.filter(restaurant=restaurant)
+  reviews = []
+  for r in revs:
+    followed = Following.objects.filter(target=r.user, follower=request.user).exists()   
+    reviews.append({
+      'review': r,
+      'followed': followed
+    })
   return render(request, 'restaurants/detail.html', {
     'restaurant': restaurant,
+    'reviews': reviews
   })
 
 class RestaurantCreate(CreateView):
