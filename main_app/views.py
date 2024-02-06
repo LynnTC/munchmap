@@ -4,6 +4,7 @@ import os
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,8 +20,12 @@ def home(request):
     'following': following,
     'reviews': reviews
   })
-  
 
+def follow_user(request, user_id, review_user_id):
+  Following.follower(user_id)
+  request.user.target.add(review_user_id)
+  return redirect('/restaurants/{restaurant_id}')
+  
 def about(request):
   return render(request, 'about.html')
 
@@ -32,8 +37,10 @@ def restaurant_index(request):
 
 def restaurants_detail(request, restaurant_id):
   restaurant = Restaurant.objects.get(id=restaurant_id)
+  user = User.objects.all()
   return render(request, 'restaurants/detail.html', {
     'restaurant': restaurant,
+    'user': user
   })
 
 class RestaurantCreate(CreateView):
@@ -43,6 +50,7 @@ class RestaurantCreate(CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
+
 
 class ReviewCreate(CreateView):
   model = Review
@@ -59,11 +67,13 @@ class ReviewCreate(CreateView):
   
   success_url = '/restaurants/{restaurant_id}'
 
+
 class ReviewUpdate(UpdateView):
   model = Review
   fields = ['content', 'rating']
   success_url = '/restaurants/{restaurant_id}'
-  
+
+
 class ReviewDelete(DeleteView):
   model = Review
   restaurant = model.restaurant
