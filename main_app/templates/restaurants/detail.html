@@ -56,8 +56,8 @@
       
             {% endif %}
             <br>
-            <p>{{ review.content }}</p><br>
-            <p>{{ review.get_rating_display }}</p><br>
+            <p>{{ review.review.content }}</p><br>
+            <p>{{ review.review.get_rating_display }}</p><br>
           </span>
           <div class="card-action">
             <a href="{% url 'reviews_update' review.review.id %}">Edit</a>

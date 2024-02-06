@@ -15,7 +15,7 @@ from .models import Restaurant, Review, Photo, Following
 
 # Create your views here.
 def home(request):
-  following = Following.objects.all()
+  following = Following.objects.filter(follower=request.user)
   reviews = Review.objects.all()
   return render(request, 'home.html', {
     'following': following,
@@ -30,6 +30,11 @@ def unfollow_user(request, restaurant_id, target_id):
     follow = Following.objects.get(target_id=target_id, follower=request.user)
     follow.delete()
     return redirect(f'/restaurants/{restaurant_id}/')
+
+def home_unfollow_user(request, target_id):
+    follow = Following.objects.get(target_id=target_id, follower=request.user)
+    follow.delete()
+    return redirect('home')
   
 def about(request):
   return render(request, 'about.html')
