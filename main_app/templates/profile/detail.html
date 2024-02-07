@@ -2,12 +2,17 @@
 {% block content %}
 
     <h1>{{ reviewer.username  }}</h1>
-
+    {% if followed %}
     <form action="{% url 'profile_unfollow_user' reviewer.id %}" method="POST">
     {% csrf_token %}
     <input type="submit" value="Unfollow" class="btn">
-  </form>
-
+    </form>
+    {% else %}
+    <form action="{% url 'profile_follow_user' reviewer.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Follow" class="btn">
+    </form>
+    {% endif %}
     {% for review in reviews %}
         <div class="card">
             <div class="card-content">
