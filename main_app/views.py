@@ -1,6 +1,7 @@
 import uuid
 import boto3
 import os
+import requests
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
@@ -73,14 +74,30 @@ def restaurants_detail(request, restaurant_id):
     'reviews': reviews
   })
 
+@login_required
+def restaurant_create(request):
+  YELP_URL = 'https://api.yelp.com/v3/businesses/search?categories=[restaurant]&term={}&location={}'
+  term = request.GET.get('search')
+  location = request.GET.get('location')
+  url = YELP_URL.format(term, location)
+  headers = {
+    "accept": "application/json",
+    "Authorization": f"Bearer {os.environ['YELP_API_KEY']}"
+    }
+  response = requests.get(url, headers=headers)
+  print(response.json())
+  return render(request, 'restaurants/create.html', {
+    'restaurants': response.json()['businesses'],
+    'search': term
+  })
 
-class RestaurantCreate(LoginRequiredMixin, CreateView):
-  model = Restaurant
-  fields = ['name', 'description', 'genre', 'price']
+# class RestaurantCreate(LoginRequiredMixin, CreateView):
+#   model = Restaurant
+#   fields = ['name', 'description', 'genre', 'price']
 
-  def form_valid(self, form):
-    form.instance.user = self.request.user
-    return super().form_valid(form)
+#   def form_valid(self, form):
+#     form.instance.user = self.request.user
+#     return super().form_valid(form)
 
 
 class ReviewCreate(LoginRequiredMixin, CreateView):

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Add Restaurants</h1>
+
+<form method="GET" action="">
+    <input name="search" placeholder="Enter Name" required>
+    <input name="location" placeholder="City, State" required>
+    <button type="submit">Search</button>
+</form>
+<hr>
+{% for restaurant in restaurants %}
+    <article>
+        <p>{{ restaurant.name }}</p>
+        <p>{{ restaurant.location.address1 }}</p>
+        <p>{{ restaurant.location.city }} {{ restaurant.location.zip_code }}</p>
+    </article>
+{% empty %}
+    <h3>No Results</h3>
+{% endfor %}
+
+{% endblock %}
