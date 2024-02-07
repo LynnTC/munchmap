@@ -38,6 +38,11 @@ def home_unfollow_user(request, target_id):
     follow = Following.objects.get(target_id=target_id, follower=request.user)
     follow.delete()
     return redirect('home')
+
+def profile_unfollow(request, target_id):
+  follow = Following.objects.get(target_id=target_id, follower=request.user)
+  follow.delete()
+  return redirect(f'/profile/{target_id}')
   
 def home(request):
   return render(request, 'home.html')
