@@ -99,6 +99,16 @@ class ReviewDelete(LoginRequiredMixin, DeleteView):
   model = Review
   restaurant = model.restaurant
   success_url = '/restaurants/{restaurant_id}'
+
+def profile_detail(request, target_id):
+  reviewer = User.objects.get(id=target_id)
+  reviews = Review.objects.filter(user_id=reviewer)
+
+  return render(request, 'profile/detail.html', {
+    'reviews': reviews,
+    'reviewer': reviewer
+  })
+
   
 @login_required
 def add_photo(request, restaurant_id):

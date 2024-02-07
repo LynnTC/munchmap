@@ -5,8 +5,7 @@
 
 
 {% for follow in following %}
-
-  <h3>{{ follow.target }}</h3>
+  <a href="{% url 'profile_detail' follow.target.id %}"><h3>{{ follow.target }}</h3></a>
     <form action="{% url 'home_unfollow_user' follow.target.id %}" method="POST">
     {% csrf_token %}
     <input type="submit" value="Unfollow" class="btn">
