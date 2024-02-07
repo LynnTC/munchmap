@@ -43,7 +43,11 @@ def home_unfollow_user(request, target_id):
 def profile_unfollow_user(request, target_id):
   follow = Following.objects.get(target_id=target_id, follower=request.user)
   follow.delete()
-  return redirect(f'/profile/{target_id}')
+  return redirect(f'/profile/{target_id}/')
+
+def profile_follow_user(request, target_id):
+  Following.objects.create(target_id=target_id, follower=request.user)
+  return redirect(f'/profile/{target_id}/')
   
 def home(request):
   return render(request, 'home.html')
@@ -109,10 +113,12 @@ class ReviewDelete(LoginRequiredMixin, DeleteView):
 def profile_detail(request, target_id):
   reviewer = User.objects.get(id=target_id)
   reviews = Review.objects.filter(user_id=reviewer)
+  followed = Following.objects.filter(target=target_id, follower=request.user).exists()   
 
   return render(request, 'profile/detail.html', {
     'reviews': reviews,
-    'reviewer': reviewer
+    'reviewer': reviewer,
+    'followed': followed
   })
 
   
