@@ -3,6 +3,11 @@
 
     <h1>{{ reviewer.username  }}</h1>
 
+    <form action="{% url 'profile_unfollow_user' reviewer.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Unfollow" class="btn">
+  </form>
+
     {% for review in reviews %}
         <div class="card">
             <div class="card-content">
