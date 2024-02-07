@@ -25,6 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
+YELP_API_KEY: os.environ['YELP_API_KEY']
+ENDPOINT = 'https://api.yelp.com/v3/businessess/search'
+HEADERS = {'Authorization': 'bearer %s' % os.environ['YELP_API_KEY']}
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-nb%t*rd0ypfhf!!ms9cb@3jhb(aei*#abtgvkwunuqxegkc-_r'
 
