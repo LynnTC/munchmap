@@ -74,6 +74,8 @@ def restaurants_detail(request, restaurant_id):
     'reviews': reviews
   })
 
+def restaurant_create(request):
+
 @login_required
 def restaurant_search(request):
   YELP_URL = 'https://api.yelp.com/v3/businesses/search?categories=[restaurant]&term={}&location={}'

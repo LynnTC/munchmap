@@ -16,7 +16,7 @@
                 <span class="card-title"><p>{{ restaurant.name }}</p></span>
             </div>
             <div class="col s6">
-                <form action="url">
+                <form action="url" name="{{restaurant.location.address1}}">
                     {% csrf_token %}
                     <input type="submit" method="POST" value="➕">
                 </form>
