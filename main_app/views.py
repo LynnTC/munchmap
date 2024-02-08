@@ -74,16 +74,24 @@ def restaurants_detail(request, restaurant_id):
     'reviews': reviews
   })
 
-def restaurant_create(request, restaurant):
-  model = Restaurant
-  model.name = restaurant.name
-  model.description = restaurant.categories.alias
-  model.genre = restaurant.categories.title
-  model.price = restaurant.price.length()
-  model.user = request.user
-  model.yelp_api_id = restaurant.id
-  return redirect(f'/restaurants/{restaurant.id}/')
-
+def restaurant_create(request, id):
+  YELP_URL = f'https://api.yelp.com/v3/businesses/{id}'
+  headers = {
+    "accept": "application/json",
+    "Authorization": f"Bearer {os.environ['YELP_API_KEY']}"
+    }
+  response = requests.get(YELP_URL, headers=headers)
+  yelp_data = response.json()
+  print(yelp_data['name'])
+  restaurant = Restaurant.objects.create(
+    name=yelp_data['name'],
+    description=yelp_data['categories'],
+    price=yelp_data['price'],
+    user=request.user,
+    yelp_api_id=id
+    )
+  restaurant.save()
+  return redirect(f'/')
 
 @login_required
 def restaurant_search(request):
