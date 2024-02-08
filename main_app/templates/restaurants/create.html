@@ -10,11 +10,13 @@
 </form>
 <hr>
 {% for restaurant in restaurants %}
-    <article>
-        <p>{{ restaurant.name }}</p>
-        <p>{{ restaurant.location.address1 }}</p>
-        <p>{{ restaurant.location.city }} {{ restaurant.location.zip_code }}</p>
-    </article>
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title"><p>{{ restaurant.name }} <a href="url ">➕</a></p></span>
+            <p>{{ restaurant.location.address1 }}</p>
+            <p>{{ restaurant.location.city }} {{ restaurant.location.zip_code }}</p>
+        </div>
+    </div>
 {% empty %}
     <h3>No Results</h3>
 {% endfor %}

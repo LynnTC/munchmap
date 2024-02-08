@@ -75,7 +75,7 @@ def restaurants_detail(request, restaurant_id):
   })
 
 @login_required
-def restaurant_create(request):
+def restaurant_search(request):
   YELP_URL = 'https://api.yelp.com/v3/businesses/search?categories=[restaurant]&term={}&location={}'
   term = request.GET.get('search')
   location = request.GET.get('location')
@@ -86,18 +86,15 @@ def restaurant_create(request):
     }
   response = requests.get(url, headers=headers)
   print(response.json())
-  return render(request, 'restaurants/create.html', {
+  if 'businesses' in response.json():
+    return render(request, 'restaurants/create.html', {
     'restaurants': response.json()['businesses'],
     'search': term
-  })
-
-# class RestaurantCreate(LoginRequiredMixin, CreateView):
-#   model = Restaurant
-#   fields = ['name', 'description', 'genre', 'price']
-
-#   def form_valid(self, form):
-#     form.instance.user = self.request.user
-#     return super().form_valid(form)
+    })
+  else: 
+    return render(request, 'restaurants/create.html', {
+      'search': term
+    })
 
 
 class ReviewCreate(LoginRequiredMixin, CreateView):
