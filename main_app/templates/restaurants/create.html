@@ -12,7 +12,15 @@
 {% for restaurant in restaurants %}
     <div class="card">
         <div class="card-content">
-            <span class="card-title"><p>{{ restaurant.name }} <a href="url ">➕</a></p></span>
+            <div class="col s6">
+                <span class="card-title"><p>{{ restaurant.name }}</p></span>
+            </div>
+            <div class="col s6">
+                <form action="url">
+                    {% csrf_token %}
+                    <input type="submit" method="POST" value="➕">
+                </form>
+            </div>
             <p>{{ restaurant.location.address1 }}</p>
             <p>{{ restaurant.location.city }} {{ restaurant.location.zip_code }}</p>
         </div>
