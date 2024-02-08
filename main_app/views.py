@@ -74,7 +74,16 @@ def restaurants_detail(request, restaurant_id):
     'reviews': reviews
   })
 
-def restaurant_create(request):
+def restaurant_create(request, restaurant):
+  model = Restaurant
+  model.name = restaurant.name
+  model.description = restaurant.categories.alias
+  model.genre = restaurant.categories.title
+  model.price = restaurant.price.length()
+  model.user = request.user
+  model.yelp_api_id = restaurant.id
+  return redirect(f'/restaurants/{restaurant.id}/')
+
 
 @login_required
 def restaurant_search(request):
