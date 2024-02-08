@@ -1,24 +1,37 @@
-# MunchMap
-A description of your game. Background info of the game is a nice touch.
+# Munch Map
+Munch Map is an app to help you find new restauarants via the reviews of fellow users that you follow. Find people that share your tastes and opinions, follow them and find new and exciting places to eat. Connect with our growing base of users and create a community dedicated to the one thing that truly ties us all together: our appetites! 
 
-# Screenshot
+# Screen Shots
 
 <imgur.com real image, wow>
 <imgur.com 2nd image, amazing>
 
 # Technologies Used
 
-- JavaScript
-- HTML
-- CSS
-- Django
+![Python](https://img.shields.io/badge/-Python-05122A?style=flat&logo=python)
+![CSS3](https://img.shields.io/badge/-CSS-05122A?style=flat&logo=css3)
+![Materialize CSS](https://img.shields.io/badge/-Materialize_CSS-05122A?style=flat&logo=materialdesign)
+![HTML5](https://img.shields.io/badge/-HTML5-05122A?style=flat&logo=html5)
+![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript)
+![Django](https://img.shields.io/badge/-Django-05122A?style=flat&logo=django)
+![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-05122A?style=flat&logo=postgresql)
+![Github](https://img.shields.io/badge/-GitHub-05122A?style=flat&logo=github)
+![VSCode](https://img.shields.io/badge/-VS_Code-05122A?style=flat&logo=visualstudio)
+![AWS S3](https://img.shields.io/badge/-AWS_S3-05122A?style=flat&logo=amazons3)
+![Heroku](https://img.shields.io/badge/-Heroku-05122A?style=flat&logo=heroku)
+![Trello](https://img.shields.io/badge/-Trello-05122A?style=flat&logo=trello)
+![Canva](https://img.shields.io/badge/-Canva-05122A?style=flat&logo=canva)
+
 
 # Getting Started
 
-[Trello](https://trello.com/b/QVE7bgiE/project-3)
-[Website Link, works for sure](google.com)
+[Trello](https://trello.com/b/QVE7bgiE/munch-map)
+
+[Munch Map](https://munchmap-27b10007ae5f.herokuapp.com/)
 
 # Next Steps
 
-- Future enhancement one...
-- Future enhancement two... 
+- Utilize API's to allow posting to social media sites
+- Continue to style and refine our user interface
+- Incorporate more location based API's to help route users to new restaurants
+- Offer Avatar icons
