@@ -46,6 +46,7 @@ def profile_unfollow_user(request, target_id):
   follow.delete()
   return redirect(f'/profile/{target_id}/')
 
+@login_required
 def profile_follow_user(request, target_id):
   Following.objects.create(target_id=target_id, follower=request.user)
   return redirect(f'/profile/{target_id}/')
@@ -74,6 +75,7 @@ def restaurants_detail(request, restaurant_id):
     'reviews': reviews
   })
 
+@login_required
 def restaurant_create(request, id):
   YELP_URL = f'https://api.yelp.com/v3/businesses/{id}'
   headers = {
@@ -86,18 +88,22 @@ def restaurant_create(request, id):
   desc = ""
   for li in catlist:
     desc += li['alias']
-    desc += ', '
-
-  restaurant = Restaurant.objects.create(
-    name=yelp_data['name'],
-    description=desc,
-    price=yelp_data['price'],
-    user=request.user,
-    yelp_api_id=id,
-    picture=yelp_data['image_url']
-    )
-  restaurant.save()
-  return redirect(f'/')
+    desc += ', '  
+  try:
+    if Restaurant.objects.get(yelp_api_id=id):
+      restaurant = Restaurant.objects.get(yelp_api_id=id)
+      return redirect(f'/restaurants/{restaurant.id}')
+  except:   
+    restaurant = Restaurant.objects.create(
+      name=yelp_data['name'],
+      description=desc,
+      price=yelp_data['price'],
+      user=request.user,
+      yelp_api_id=id,
+      picture=yelp_data['image_url']
+      )
+    restaurant.save()
+    return redirect('../')
 
 @login_required
 def restaurant_search(request):
@@ -110,7 +116,6 @@ def restaurant_search(request):
     "Authorization": f"Bearer {os.environ['YELP_API_KEY']}"
     }
   response = requests.get(url, headers=headers)
-  print(response.json())
   if 'businesses' in response.json():
     return render(request, 'restaurants/create.html', {
     'restaurants': response.json()['businesses'],
