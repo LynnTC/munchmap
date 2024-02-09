@@ -82,13 +82,19 @@ def restaurant_create(request, id):
     }
   response = requests.get(YELP_URL, headers=headers)
   yelp_data = response.json()
-  print(yelp_data['name'])
+  catlist = yelp_data['categories']
+  desc = ""
+  for li in catlist:
+    desc += li['alias']
+    desc += ', '
+
   restaurant = Restaurant.objects.create(
     name=yelp_data['name'],
-    description=yelp_data['categories'],
+    description=desc,
     price=yelp_data['price'],
     user=request.user,
-    yelp_api_id=id
+    yelp_api_id=id,
+    picture=yelp_data['image_url']
     )
   restaurant.save()
   return redirect(f'/')

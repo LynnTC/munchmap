@@ -20,6 +20,7 @@ class Restaurant(models.Model):
   price = models.CharField(max_length=50)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   yelp_api_id = models.CharField(max_length=50)
+  picture = models.CharField(max_length=300)
 
   def __str__(self):
     return f'{self.name} ({self.id})'
