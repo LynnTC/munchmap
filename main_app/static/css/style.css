@@ -9,6 +9,12 @@ main {
   flex: 1 0 auto;
 }
 
+.displaypic {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+}
 footer.page-footer {
   padding-top: 0;
   text-align: right;

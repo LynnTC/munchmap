@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 <h1>Feed</h1>
 
@@ -8,7 +9,7 @@
   <a href="{% url 'profile_detail' follow.target.id %}"><h3>{{ follow.target }}</h3></a>
     <form action="{% url 'home_unfollow_user' follow.target.id %}" method="POST">
     {% csrf_token %}
-    <input type="submit" value="Unfollow" class="btn">
+    <input type="image" src="{% static '/images/munchmapunfollowpink.png' %}" style="max-width: 25px;" alt="UnFollow User">
   </form>
 
   {% for review in reviews %}
@@ -18,7 +19,7 @@
       <div class="card">
         <div class="card-content">
           <span class="card-title">
-            <p>{{ review.restaurant.name }}</p><br>
+            <a href="{% url 'detail' review.restaurant.id %}">{{ review.restaurant.name }}</a><br>
             <p>{{ review.content }}</p><br>
             <p>{{ review.get_rating_display }}</p><br>
           </span>
