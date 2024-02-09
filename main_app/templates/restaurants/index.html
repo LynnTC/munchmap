@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>My Restaurants</h1>
+<h1>Restaurants</h1>
 
 {% for restaurant in restaurants %}
     <a href="{% url 'detail' restaurant.id %}">

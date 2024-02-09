@@ -88,8 +88,7 @@ def restaurant_create(request, id):
   desc = ""
   for li in catlist:
     desc += li['alias']
-    desc += ', '
-  
+    desc += ', '  
   try:
     if Restaurant.objects.get(yelp_api_id=id):
       restaurant = Restaurant.objects.get(yelp_api_id=id)

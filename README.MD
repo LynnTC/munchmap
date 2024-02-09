@@ -3,8 +3,8 @@ Munch Map is an app to help you find new restauarants via the reviews of fellow 
 
 # Screen Shots
 
-<imgur.com real image, wow>
-<imgur.com 2nd image, amazing>
+<>
+<>
 
 # Technologies Used
 
@@ -32,6 +32,7 @@ Munch Map is an app to help you find new restauarants via the reviews of fellow 
 # Next Steps
 
 - Utilize API's to allow posting to social media sites
-- Continue to style and refine our user interface
 - Incorporate more location based API's to help route users to new restaurants
+- Continue to style and refine our user interface
 - Offer Avatar icons
+- Add ability to add and remove photos in reviews
