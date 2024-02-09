@@ -43,3 +43,17 @@ button.submit-link:focus {
   background-color: transparent;
   outline: none;
 }
+
+.follow > * {
+  display: inline;
+}
+
+.follow {
+  height: 100px;
+}
+
+.name {
+  width: 100px;
+  height: 100px;
+  margin-bottom: auto;
+}

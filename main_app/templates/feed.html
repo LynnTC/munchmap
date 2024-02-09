@@ -6,12 +6,13 @@
 
 
 {% for follow in following %}
-  <a href="{% url 'profile_detail' follow.target.id %}"><h3>{{ follow.target }}</h3></a>
+  <div class="follow">
+    <a href="{% url 'profile_detail' follow.target.id %}"><h3>{{ follow.target }}</h3></a>
     <form action="{% url 'home_unfollow_user' follow.target.id %}" method="POST">
     {% csrf_token %}
     <input type="image" src="{% static '/images/munchmapunfollowpink.png' %}" style="max-width: 25px;" alt="UnFollow User">
-  </form>
-
+    </form>
+  </div>
   {% for review in reviews %}
     
     {% if follow.target == review.user %}  
