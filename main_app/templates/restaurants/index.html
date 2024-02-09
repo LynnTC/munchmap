@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-
-
-
-<h1>Restaurants</h1>
-
-
+<br>
+<br>
 {% for restaurant in restaurants %}
     <a href="{% url 'detail' restaurant.id %}">
         <div class="card light-blue lighten-2">
