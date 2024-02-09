@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %} 
 
 <h1>Add Restaurants</h1>
 
@@ -16,9 +17,9 @@
                 <span class="card-title"><p>{{ restaurant.name }}</p></span>
             </div>
             <div class="col s6">
+                <input type="image" src="{% static '/images/munchmapfollowblue.png' %}" style="max-width: 25px;" alt="Add Restaurant">
                 <form action="{% url 'restaurant_create' restaurant.id %}" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="➕">
                 </form>
             </div>
             <p>{{ restaurant.location.address1 }}</p>

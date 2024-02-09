@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 <h1>Restaurants</h1>
 
-<a href="{% url 'reviews_create' restaurant_id=restaurant.id %}">Add Review</a>
+
 
 <div class="row">
   <div class="col s12">
@@ -12,7 +13,7 @@
         <span class="card-title">{{ restaurant.name }}</span><br>
         <p>Type: {{ restaurant.description }}</p><br>
         <p>Price: {{ restaurant.price }}</p><br>
-        <img src="{{ restaurant.picture }}" alt="" width="800" height="800">
+        <img class="displaypic" src="{{ restaurant.picture }}" alt="">
       </div>
     </div>
   </div>
@@ -21,7 +22,7 @@
   {% for photo in restaurant.photo_set.all %}
     <img class="responsive-img card-panel" src="{{ photo.url }}" alt="photo of restaurant">
   {% empty %}
-    <div class="card-panel black-text center-align">No Photos Uploaded</div>
+    <div class="card-panel black-text center-align">No User Photos Uploaded</div>
   {% endfor %}
 <form action="{% url 'add_photo' restaurant.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
   {% csrf_token %}
@@ -30,6 +31,7 @@
   <button type="submit" class="btn">Upload Photo</button>
 </form>
 </div>
+<a href="{% url 'reviews_create' restaurant_id=restaurant.id %}" class="btn">Add Review</a>
 <div class="row">
   <div class="col s12">
     {% for review in reviews %}
@@ -39,19 +41,15 @@
             <p>{{ review.review.user.username }}</p>
             {% if user.id != review.review.user.id %}
               {% if review.followed %}
-                <div class="card-action">
                   <form action="{% url 'unfollow_user' restaurant.id review.review.user.id %}" method="POST">
                   {% csrf_token %}
-                  <input type="submit" value="Unfollow" class="btn">
+                  <input type="image" src="{% static '/images/munchmapunfollowpink.png' %}" style="max-width: 25px;" alt="UnFollow User">
                 </form>
-                </div>
               {% else %}
-                <div class="card-action">
                   <form action="{% url 'follow_user' restaurant.id review.review.user.id %}" method="POST">
                   {% csrf_token %}
-                  <input type="submit" value="Follow" class="btn">
+                  <input type="image" src="{% static '/images/munchmapfollowblue.png' %}" style="max-width: 25px;" alt="Follow User">
                 </form>
-                </div>
               {% endif %}
       
             {% endif %}
